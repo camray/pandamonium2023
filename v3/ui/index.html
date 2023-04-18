@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">
+      import init, { calculate_grade } from "../pkg/v3.js";
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+      function getRandomWorkflowState() {
+        const states = ["graded", "ungraded", "pending_review"];
+        return states[getRandomInt(states.length)];
+      }
+
+      function getRandomSubmission() {
+        return {
+          id: getRandomInt(1000),
+          user_id: 1,
+          score: getRandomInt(100),
+          points_possible: 100,
+          workflow_state: getRandomWorkflowState(),
+        };
+      }
+
+      async function run() {
+        await init();
+
+        document.querySelector("button").addEventListener("click", () => {
+          const submissionCount = getRandomInt(100);
+          const submissions = Array.from(
+            { length: submissionCount },
+            getRandomSubmission
+          );
+
+          // WASM in the BROWSER!! :D
+          const grade = calculate_grade(JSON.stringify(submissions));
+
+          console.log(grade);
+          document.querySelector("#final-grade").textContent =
+            (grade.percentage * 100).toFixed(2) + "%";
+        });
+      }
+      run();
+    </script>
+  </head>
+
+  <body>
+    <button>Calculate final grade</button>
+    <div>Final grade: <span id="final-grade"></span></div>
+  </body>
+</html>

@@ -1,22 +1,16 @@
-#![allow(dead_code)]
-
 struct Submission {
-    id: u64,
-    user_id: u64,
     score: f64,
     points_possible: f64,
-    workflow_state: String,
 }
 
-#[derive(Debug)]
-struct Grade {
+struct FinalGrade {
     score: f64,
     possible: f64,
     percentage: f64,
 }
 
 // Takes a reference to a vector of submissions and returns a final grade
-fn calculate_grade(submissions: &Vec<Submission>) -> Grade {
+fn calculate_grade(submissions: &Vec<Submission>) -> FinalGrade {
     let mut total_score = 0.0;
     let mut total_possible = 0.0;
 
@@ -25,7 +19,7 @@ fn calculate_grade(submissions: &Vec<Submission>) -> Grade {
         total_possible += submission.points_possible;
     }
 
-    Grade {
+    FinalGrade {
         score: total_score,
         possible: total_possible,
         percentage: total_score / total_possible,
@@ -35,25 +29,16 @@ fn calculate_grade(submissions: &Vec<Submission>) -> Grade {
 fn main() {
     let submissions = vec![
         Submission {
-            id: 1,
-            user_id: 1,
-            score: 5.0,
+            score: 8.5,
             points_possible: 10.0,
-            workflow_state: "graded".to_string(),
         },
         Submission {
-            id: 2,
-            user_id: 1,
             score: 10.0,
             points_possible: 10.0,
-            workflow_state: "graded".to_string(),
         },
         Submission {
-            id: 3,
-            user_id: 1,
             score: 10.0,
             points_possible: 10.0,
-            workflow_state: "graded".to_string(),
         },
     ];
 

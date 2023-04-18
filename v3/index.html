@@ -5,12 +5,16 @@
 
     <body>
         <script type="module">
-            import init, { greet } from './pkg/v2.js';
+            import init, { start } from './pkg/v3.js';
             async function run() {
                 await init();
-                greet('World!');
+                start();
             }
             run();
         </script>
+
+        <button>
+            Click me
+        </button>
     </body>
 </html>

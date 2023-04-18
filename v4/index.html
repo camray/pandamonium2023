@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <body>
+    <script type="module">
+      import init, { calculate_grade } from "./pkg/v4.js";
+
+      const WORKFLOW_STATES = ["graded", "ungraded", "submitted"];
+
+      async function run() {
+        await init();
+
+        document.querySelector("button").addEventListener("click", () => {
+          const grade = calculate_grade(
+            JSON.stringify([
+              {
+                id: 1,
+                user_id: 1,
+                score: 10,
+                points_possible: 10,
+                workflow_state: "graded",
+              },
+              {
+                id: 2,
+                user_id: 1,
+                score: 10,
+                points_possible: 10,
+                workflow_state: "graded",
+              },
+              {
+                id: 3,
+                user_id: 1,
+                score: 8,
+                points_possible: 10,
+                workflow_state: "graded",
+              },
+            ])
+          );
+
+          console.log(grade);
+        });
+      }
+      run();
+    </script>
+
+    <button>Click me</button>
+  </body>
+</html>

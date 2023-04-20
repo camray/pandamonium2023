@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    </head>
-
     <body>
         <script type="module">
             import init, { start } from './pkg/v2.js';
-            async function run() {
-                await init();
-                start();
-            }
-            run();
+            init().then(start);
         </script>
 
         <button>

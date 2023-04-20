@@ -4,11 +4,8 @@ use wasm_bindgen::prelude::*;
 
 #[derive(Deserialize)]
 struct Submission {
-    id: u64,
-    user_id: u64,
     score: f64,
     points_possible: f64,
-    workflow_state: String,
 }
 
 #[derive(Serialize)]
@@ -19,24 +16,18 @@ struct Grade {
 }
 
 fn deserialize_submissions(json: &str) -> Result<Vec<Submission>, serde_json::Error> {
-    let submissions = serde_json::from_str(json);
-    match submissions {
-        Ok(submissions) => Ok(submissions),
-        Err(e) => Err(e),
-    }
+    serde_json::from_str(json) as Result<Vec<Submission>, serde_json::Error>
 }
 
 #[wasm_bindgen]
 pub fn calculate_grade(submissions_json: &str) -> JsValue {
-    let mut total_score = 0.0;
-    let mut total_possible = 0.0;
-
     let submissions =
         deserialize_submissions(submissions_json).expect("Failed to deserialize submissions");
 
-    let active_submissions = submissions.iter().filter(|s| s.workflow_state == "graded");
+    let mut total_score = 0.0;
+    let mut total_possible = 0.0;
 
-    for submission in active_submissions {
+    for submission in submissions {
         total_score += submission.score;
         total_possible += submission.points_possible;
     }

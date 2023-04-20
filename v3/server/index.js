@@ -1,4 +1,4 @@
-import { calculate_grade } from "../../v3/pkg/v3.js";
+import { calculate_grade } from "../pkg/v3.js";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));

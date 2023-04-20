@@ -23,9 +23,7 @@
         };
       }
 
-      async function run() {
-        await init();
-
+      init().then(() => {
         document.querySelector("button").addEventListener("click", () => {
           const submissionCount = getRandomInt(100);
           const submissions = Array.from(
@@ -40,8 +38,7 @@
           document.querySelector("#final-grade").textContent =
             (grade.percentage * 100).toFixed(2) + "%";
         });
-      }
-      run();
+      });
     </script>
   </head>
 

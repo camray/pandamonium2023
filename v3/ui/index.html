@@ -25,9 +25,8 @@
 
       init().then(() => {
         document.querySelector("button").addEventListener("click", () => {
-          const submissionCount = getRandomInt(100);
           const submissions = Array.from(
-            { length: submissionCount },
+            { length: 100 },
             getRandomSubmission
           );
 

@@ -29,7 +29,7 @@ fn calculate_grade(submissions: &Vec<Submission>) -> FinalGrade {
 fn main() {
     let submissions = vec![
         Submission {
-            score: 8.5,
+            score: 5.5,
             points_possible: 10.0,
         },
         Submission {
@@ -43,5 +43,9 @@ fn main() {
     ];
 
     let grade = calculate_grade(&submissions);
-    println!("Final grade: {} out of {} or {}%", grade.score, grade.possible, grade.percentage);
+    println!(
+        "Final grade: {} out of {} or {}%",
+        grade.score, grade.possible, grade.percentage
+    );
 }
+
